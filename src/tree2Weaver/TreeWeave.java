@@ -1,12 +1,11 @@
-package tree1;
-
+package tree2Weaver;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.Stack;
+import tree1.Node;
 
-public class Tree<T> implements Iterable<T> {
+public class TreeWeave<T> implements Iterable<T> {
 	
 		
 	public Node<T> current = null;
@@ -14,9 +13,8 @@ public class Tree<T> implements Iterable<T> {
 	Node<T> right = new Node<T>();
 	Node<T> head = null;
 	int given = 0;
-    private Stack<Node<T>> stack = new Stack<>();
     
-	public Tree(Node<T> root){
+	public TreeWeave(Node<T> root){
 		this.head = root;
 	}
 	
@@ -73,7 +71,8 @@ public class Tree<T> implements Iterable<T> {
 	
 	@Override
 	public Iterator<T> iterator() {
-		Node<T> firstItem = this.head;
+		ArrayList<Node<T>> queuing = new ArrayList<Node<T>>();
+		queuing.add(this.head);
 		given = 0;
 		int max = count(this.head);
 		
@@ -86,21 +85,9 @@ public class Tree<T> implements Iterable<T> {
 
 			@Override
 			public T next() {
-				if(current == null) {
-					current = firstItem;
-				}else if(current != null){
-					if(current.hasLeft()){
-						stack.push(current);
-						current = current.getLeft();
-					}else if(current.hasRight()){
-						current = current.getRight();	
-					}else {
-						while(!current.hasRight()){
-							current = stack.pop();
-						}
-						current = current.getRight();	
-						}
-				}
+				current = queuing.remove(0);
+				if(current.hasLeft()) queuing.add(current.getLeft());
+				if(current.hasRight())queuing.add(current.getRight());
 				given++;
 		        return current.getData();	
 			}

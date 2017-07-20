@@ -1,15 +1,18 @@
-package tree1; 
+package tree2Weaver;
+
 
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import tree1.Node;
 
-public class TreeTest {
+
+public class TreeTestWeave {
 
 	@Test
     public void testAdd() throws Exception {
 
-		Tree<String> tree = new Tree<>(new Node<>("A"));
+		TreeWeave<String> tree = new TreeWeave<>(new Node<>("A"));
 		
 		assertFalse(tree.empty());
 		Node<String> B = new Node<>("B");
@@ -43,7 +46,7 @@ public class TreeTest {
 	@Test 
 	public void testCount() throws Exception{
 		
-		Tree<String> tree = new Tree<>(new Node<>("A"));
+		TreeWeave<String> tree = new TreeWeave<>(new Node<>("A"));
 		
 		assertFalse(tree.empty());
 		Node<String> B = new Node<>("B");
@@ -71,7 +74,7 @@ public class TreeTest {
 	@Test 
 	public void testIterator() throws Exception{
 		
-		Tree<String> tree = new Tree<>(new Node<>("A"));
+		TreeWeave<String> tree = new TreeWeave<>(new Node<>("A"));
 		
 		assertFalse(tree.empty());
 		Node<String> B = new Node<>("B");
@@ -83,8 +86,8 @@ public class TreeTest {
 		Node<String> H = new Node<>("H");
 		Node<String> I = new Node<>("I");
 		Node<String> J = new Node<>("J");
-		tree.head.setLeft(C);
-		tree.head.setRight(B);
+		tree.head.setLeft(B);
+		tree.head.setRight(C);
 		B.setLeft(D);
 		B.setRight(E);
 		C.setLeft(F);
@@ -100,7 +103,7 @@ public class TreeTest {
 	@Test 
 	public void testWeaving() throws Exception{
 		
-		Tree<String> tree = new Tree<>(new Node<>("A"));
+		TreeWeave<String> tree = new TreeWeave<>(new Node<>("A"));
 		
 		assertFalse(tree.empty());
 		Node<String> B = new Node<>("B");
@@ -128,3 +131,5 @@ public class TreeTest {
 	
 	
 }
+
+
